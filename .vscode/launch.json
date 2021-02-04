@@ -1,0 +1,67 @@
+{
+  "version": "1.0.0",
+  "configurations": [
+    {
+      "name": "Launch Dev",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceFolder}/src/index.ts",
+      "runtimeVersion": "14.15.4",
+      "outputCapture": "std",
+      "stopOnEntry": false,
+      "args": [],
+      "cwd": "${workspaceRoot}",
+      "preLaunchTask": "tsc: build - tsconfig.compile.json",
+      // "runtimeArgs": ["--nolazy"],
+      // "env": {
+      //   "NODE_ENV": "development",
+      //   "NODE_PATH": "dist/",
+      //   "PROPERTIES": "./src/config/env/dev.json",
+      //   "UV_THREADPOOL_SIZE": "1",
+      //   "TZ": "America/Sao_Paulo"
+      // },
+      "internalConsoleOptions": "openOnSessionStart",
+      "outFiles": ["${workspaceFolder}/dist/**/*.js"]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Jest Current File",
+      "program": "${workspaceFolder}/node_modules/.bin/jest",
+      "runtimeVersion": "12.18.4",
+      "args": ["--runInBand", "--detectOpenHandles", "-i", "${relativeFile}"],
+      "console": "integratedTerminal",
+      "outputCapture": "std",
+      "env": {
+        "NODE_ENV": "development",
+        "NODE_PATH": "dist/",
+        "PROPERTIES": "./src/config/env/test.json",
+        "UV_THREADPOOL_SIZE": "1",
+        "TZ": "America/Sao_Paulo"
+      },
+      "internalConsoleOptions": "neverOpen",
+      "disableOptimisticBPs": true
+    },
+    {
+      "name": "Jest Run Tests",
+      "type": "node",
+      "request": "launch",
+      "runtimeVersion": "12.18.4",
+      "program": "${workspaceFolder}/node_modules/.bin/jest",
+      "outputCapture": "std",
+      "args": ["--forceExit", "--detectOpenHandles", "--runInBand"],
+      "cwd": "${workspaceRoot}",
+      "runtimeArgs": ["--nolazy"],
+      "preLaunchTask": "tsc: build - tsconfig.json",
+      "env": {
+        "NODE_ENV": "development",
+        "NODE_PATH": "dist/",
+        "PROPERTIES": "./src/config/env/test.json",
+        "UV_THREADPOOL_SIZE": "1",
+        "TZ": "America/Sao_Paulo"
+      },
+      "internalConsoleOptions": "neverOpen",
+      "console": "integratedTerminal"
+    }
+  ]
+}

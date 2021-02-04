@@ -12,6 +12,7 @@ import cors from "cors";
 import methodOverride from "method-override";
 import mongooseConfig from "./config/mongoose";
 import {IndexCtrl} from "./controllers/pages/IndexCtrl";
+import {User} from "./models/User";
 
 export const rootDir = __dirname;
 export const isProduction = process.env.NODE_ENV === Env.PROD;
@@ -61,7 +62,14 @@ if (isProduction) {
     viewEngine: "ejs"
   },
   mongoose: mongooseConfig,
-  exclude: ["**/*.spec.ts"]
+  exclude: ["**/*.spec.ts"],
+  componentsScan: [
+    `${rootDir}/services/**/*.ts`,
+    `${rootDir}/protocols/*Protocol.ts`
+  ],
+  passport: {
+    userInfoModel: User
+  }
 })
 export class Server {
   @Inject()
