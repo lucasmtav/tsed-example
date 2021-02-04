@@ -1,6 +1,7 @@
 import {Inject, Req} from "@tsed/common";
 import {Unauthorized} from "@tsed/exceptions";
 import {Arg, OnVerify, Protocol} from "@tsed/passport";
+import _ from "lodash";
 import {ExtractJwt, Strategy} from "passport-jwt";
 import {UsersService} from "../services/UsersService";
 
@@ -19,8 +20,8 @@ export class JwtProtocol implements OnVerify {
   usersService: UsersService;
 
   async $onVerify(@Req() req: Req, @Arg(0) jwtPayload: any) {
-    const user = this.usersService.findOne({
-      id: jwtPayload.sub
+    const user = await this.usersService.findOne({
+      _id: jwtPayload.sub
     });
 
     if (!user) {
@@ -29,6 +30,6 @@ export class JwtProtocol implements OnVerify {
 
     req.user = user;
 
-    return user;
+    return _.omit(user, 'password');
   }
 }

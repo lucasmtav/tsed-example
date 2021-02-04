@@ -1,8 +1,8 @@
 
-import {BodyParams, Controller, Get, Inject, Post, Req} from "@tsed/common";
+import {BodyParams, Controller, Get, HeaderParams, Inject, Post, Req} from "@tsed/common";
 import {Authenticate, Authorize} from "@tsed/passport";
 import {Returns} from "@tsed/schema";
-import * as _ from "lodash";
+import _ from "lodash";
 import {Credential} from "../../models/Credential";
 import {User} from "../../models/User";
 import {UsersService} from "../../services/UsersService";
@@ -29,10 +29,10 @@ export class PassportController {
     return _.omit(newUser, 'password');
   }
 
-  @Get("/userinfo")
+  @Get("/whoiam")
   @Authorize("jwt")
   @Returns(200, User)
-  getUserInfo(@Req() req: Req): any {
+  whoIAm(@Req() req: Req, @HeaderParams("authorization") token: string){
     // FACADE
     return req.user;
   }
