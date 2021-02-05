@@ -1,7 +1,6 @@
 import {Inject, Req} from "@tsed/common";
 import {Unauthorized} from "@tsed/exceptions";
 import {Arg, OnVerify, Protocol} from "@tsed/passport";
-import _ from "lodash";
 import {ExtractJwt, Strategy} from "passport-jwt";
 import {UsersService} from "../services/UsersService";
 
@@ -30,6 +29,6 @@ export class JwtProtocol implements OnVerify {
 
     req.user = user;
 
-    return _.omit(user, 'password');
+    return req.user;
   }
 }
