@@ -31,8 +31,7 @@ export class PassportController {
   @Authorize("jwt")
   @Returns(200, User)
   whoAmI(@Req() req: Req, @HeaderParams("authorization") token: string){
-    const user:any = req.user;
-    return _.omit(user._doc, 'password');
+    return req.user;
   }
 
   @Get("/logout")
