@@ -1,5 +1,6 @@
 import {Model, ObjectID, Select} from "@tsed/mongoose";
 import {Description, Format, Property, Required} from "@tsed/schema";
+import {compare} from 'bcrypt';
 
 @Model()
 export class User {
@@ -29,7 +30,8 @@ export class User {
   @Property()
   created_at: Date = new Date();
 
-  verifyPassword(password: string) {
-    return this.password === password;
+  async verifyPassword(password: string) {
+    return compare(password, this.password)
+    // return this.password === password;
   }
 }

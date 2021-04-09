@@ -30,7 +30,8 @@ export class LocalProtocol implements OnVerify {
       throw new Unauthorized("Wrong credentials");
     }
 
-    if (!user.verifyPassword(password)) {
+    const passwordIsValid = await user.verifyPassword(password)
+    if (!passwordIsValid) {
       throw new Unauthorized("Wrong credentials");
     }
 

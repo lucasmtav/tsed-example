@@ -7,16 +7,15 @@ export class UsersService extends MongooseService {
   private User: MongooseModel<User>;
 
   async create(user: User): Promise<User> {
-    const newUser = await this.User.create(user);
-    return newUser;
+    return this.User.create(user);
   }
 
   async findOne(query: any, options: any={}): Promise<User | null> {
-    return await this.User.findOne(query, options).lean();
+    return this.User.findOne(query, options).lean();
   }
 
   async findOneForLogin(query: any): Promise<User | null> {
-    return await this.User.findOne(query).select("+password");
+    return this.User.findOne(query).select("+password");
   }
 
   attachToken(user: User, token: string) {

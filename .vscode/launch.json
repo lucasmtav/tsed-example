@@ -6,7 +6,7 @@
       "type": "node",
       "request": "launch",
       "program": "${workspaceFolder}/src/index.ts",
-      "runtimeVersion": "14.15.4",
+      "runtimeVersion": "14.16.1",
       "outputCapture": "std",
       "stopOnEntry": false,
       "args": [],

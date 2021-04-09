@@ -2,7 +2,7 @@
 import {BodyParams, Controller, Get, HeaderParams, Inject, Post, Req} from "@tsed/common";
 import {Authenticate, Authorize} from "@tsed/passport";
 import {Returns} from "@tsed/schema";
-import _ from "lodash";
+import {genSalt, hash} from 'bcrypt';
 import {Credential} from "../../models/Credential";
 import {User} from "../../models/User";
 import {UsersService} from "../../services/UsersService";
@@ -23,8 +23,10 @@ export class PassportController {
   @Post("/signup")
   @Returns(201, User)
   async signup(@Req() req: Req, @BodyParams() user: User) {
-    const newUser = await this.usersService.create(user)
-    return _.omit(newUser, 'password');
+    const password = await hash(user.password, await genSalt(10))
+    Object.assign(user, { password })
+    await this.usersService.create(user)
+    return
   }
 
   @Get("/whoami")
