@@ -44,7 +44,7 @@ if (isProduction) {
     disableRoutesSummary: isProduction
   },
   mount: {
-    "/rest": [`${rootDir}/controllers/**/*.ts`],
+    "/api": [`${rootDir}/controllers/**/*.ts`],
     "/": [IndexCtrl]
   },
   swagger: [

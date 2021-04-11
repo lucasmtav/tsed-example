@@ -20,7 +20,7 @@ export class JwtProtocol implements OnVerify {
 
   async $onVerify(@Req() req: Req, @Arg(0) jwtPayload: any) {
     const user = await this.usersService.findOne({
-      _id: jwtPayload.sub
+      _id: jwtPayload.id
     });
 
     if (!user) {

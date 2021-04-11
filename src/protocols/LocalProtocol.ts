@@ -50,7 +50,10 @@ export class LocalProtocol implements OnVerify {
       {
         iss: issuer,
         aud: audience,
-        sub: user._id,
+        id: user._id,
+        email: user.email,
+        first_name: user.first_name,
+        last_name: user.last_name,
         exp: now + maxAge * 1000,
         iat: now
       },
